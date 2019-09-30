@@ -119,7 +119,8 @@ https://docs.confluent.io/current/installation/installing_cp/zip-tar.html?_ga=2.
 				}
 
 
-### cCalling class
+### Calling class
+
 			import java.util.concurrent.ExecutionException;
 			import java.util.concurrent.TimeUnit;
 			import java.util.concurrent.TimeoutException;
