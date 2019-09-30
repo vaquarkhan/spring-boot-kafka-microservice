@@ -20,12 +20,14 @@ https://docs.confluent.io/current/installation/installing_cp/zip-tar.html?_ga=2.
 - https://www.cnblogs.com/felixzh/p/9089508.html
 
 ---------------------------------------------------
-### How to call kafka using @Async 
+### How to call kafka using @Async
+
+ - https://stackoverflow.com/questions/47351435/spring-async-with-completablefuture
+ - https://spring.io/guides/gs/async-method/
+ - https://howtodoinjava.com/spring-boot2/rest/enableasync-async-controller/
+ - https://dzone.com/articles/spring-boot-creating-asynchronous-methods-using-as
  
-       - https://stackoverflow.com/questions/47351435/spring-async-with-completablefuture
-       - https://spring.io/guides/gs/async-method/
-       - https://howtodoinjava.com/spring-boot2/rest/enableasync-async-controller/
-       - https://dzone.com/articles/spring-boot-creating-asynchronous-methods-using-as
+      
 
          import org.springframework.scheduling.annotation.Async;
          import org.springframework.stereotype.Component;
