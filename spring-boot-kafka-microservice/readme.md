@@ -55,3 +55,14 @@ https://docs.confluent.io/current/installation/installing_cp/zip-tar.html?_ga=2.
 						responseEntity = restTemplate.exchange(URL, HttpMethod.POST, request, String.class);
 						log.info("successfully save message asynchronously.");
 					}
+					
+					
+### Spring kafka template
+
+- https://dzone.com/articles/magic-of-kafka-with-spring-boot
+- https://medium.com/@contactsunny/simple-apache-kafka-producer-and-consumer-using-spring-boot-41be672f4e2b
+- https://www.tutorialspoint.com/spring_boot/spring_boot_apache_kafka.htm
+- https://www.javainuse.com/spring/spring-boot-apache-kafka-hello-world
+
+
+
