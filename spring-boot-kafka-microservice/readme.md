@@ -63,6 +63,38 @@ https://docs.confluent.io/current/installation/installing_cp/zip-tar.html?_ga=2.
 - https://medium.com/@contactsunny/simple-apache-kafka-producer-and-consumer-using-spring-boot-41be672f4e2b
 - https://www.tutorialspoint.com/spring_boot/spring_boot_apache_kafka.htm
 - https://www.javainuse.com/spring/spring-boot-apache-kafka-hello-world
+- https://www.onlinetutorialspoint.com/spring-boot/sending-spring-boot-kafka-json-message-to-kafka-topic.html
+
+
+
+			import java.util.concurrent.ExecutionException;
+			import java.util.concurrent.TimeUnit;
+			import java.util.concurrent.TimeoutException;
+			import org.apache.kafka.common.KafkaException;
+			import org.springframework.beans.factory.annotation.Autowired;
+			import org.springframework.beans.factory.annotation.Qualifier;
+			import org.springframework.kafka.core.KafkaTemplate;
+			import org.springframework.kafka.support.SendResult;
+			import org.springframework.stereotype.Service;
+
+
+			@Service
+			public class KafkaProducerService {
+				
+				@Autowired
+				@Qualifier("kafkaTemplate")
+				private KafkaTemplate<String, String> kafkaTemplate;
+				
+				
+				public KafkaSendResponse sendMessageToKafka(String topic, String message) throws Exception {
+					
+						result = this.kafkaTemplate.send(topic, message).get(100, TimeUnit.SECONDS);
+						return new KafkaResponse(result.getRecordMetadata());
+					
+				}
+
+			}
+
 
 
 
