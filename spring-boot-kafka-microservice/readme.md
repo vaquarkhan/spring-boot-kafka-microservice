@@ -56,7 +56,8 @@ https://docs.confluent.io/current/installation/installing_cp/zip-tar.html?_ga=2.
 						log.info("successfully save message asynchronously.");
 					}
 					
-					
+-----------------------------------------------------
+
 ### Spring kafka template
 
 - https://dzone.com/articles/magic-of-kafka-with-spring-boot
@@ -66,7 +67,59 @@ https://docs.confluent.io/current/installation/installing_cp/zip-tar.html?_ga=2.
 - https://www.onlinetutorialspoint.com/spring-boot/sending-spring-boot-kafka-json-message-to-kafka-topic.html
 
 
+### Config template :
 
+				import java.util.HashMap;
+				import java.util.Map;
+
+				import org.apache.kafka.clients.producer.ProducerConfig;
+				import org.apache.kafka.common.serialization.StringSerializer;
+				import org.springframework.beans.factory.annotation.Qualifier;
+				import org.springframework.beans.factory.annotation.Value;
+				import org.springframework.context.annotation.Bean;
+				import org.springframework.context.annotation.Configuration;
+				import org.springframework.kafka.core.DefaultKafkaProducerFactory;
+				import org.springframework.kafka.core.KafkaTemplate;
+				import org.springframework.kafka.core.ProducerFactory;
+
+				@Configuration
+				public class Config {
+					
+					@Bean
+					public ProducerFactory<String, String> producerFactory() {
+						Map<String, Object> configs = new HashMap<>();
+						configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");//server ip
+						configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+						configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,JsonSerializer.class);//      StringSerializer.class
+						//SSL config
+						configs.put("security.protocol", "securityProtocol");
+						configs.put("ssl.key.password", "trust-store-keyPassword");
+						configs.put("ssl.keystore.location", "trust-store-keystoreLocation");
+						configs.put("ssl.keystore.password", "trust-store-keystorePassword");
+						configs.put("ssl.truststore.location", "trust-store-Location");
+						configs.put("ssl.truststore.password", "trust-store-Password");
+						// others properties
+						configs.put("acks", "all");
+						configs.put("retries", 0);
+						configs.put("batch.size", 16384);
+						configs.put("linger.ms", 1);
+						configs.put("buffer.memory", 33554432);
+						
+						
+						return new DefaultKafkaProducerFactory<>(configs);
+					}
+					
+					@Bean
+					@Qualifier("kafkaTemplate")
+					public KafkaTemplate<String, String> kafkaTemplate() {
+						return new KafkaTemplate<>(producerFactory());
+					}
+					
+	
+				}
+
+
+### cCalling class
 			import java.util.concurrent.ExecutionException;
 			import java.util.concurrent.TimeUnit;
 			import java.util.concurrent.TimeoutException;
